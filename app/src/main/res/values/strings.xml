@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">HappyTenant</string>
+
+    <string name="watchman_onboarding_title">Watchman Onboarding</string>
+    <string name="watchman_onboarding_subtitle">Register your building so tenants can connect with you.</string>
+
+    <string name="hint_building_name">Building Name</string>
+    <string name="hint_building_id">Building ID / Code</string>
+    <string name="hint_watchman_name">Your Name</string>
+    <string name="hint_watchman_phone">Phone Number</string>
+
+    <string name="action_register_building">Register Building</string>
+    <string name="action_open_watchman_onboarding">Watchman: Register Building</string>
+
+    <string name="err_required">Required</string>
+    <string name="msg_onboard_success">Building registered.</string>
+    <string name="msg_onboard_failed">Failed: %1$s</string>
+    <string name="msg_supabase_hint">Check your Supabase URL/Anon Key in BuildConfig.</string>
+</resources>

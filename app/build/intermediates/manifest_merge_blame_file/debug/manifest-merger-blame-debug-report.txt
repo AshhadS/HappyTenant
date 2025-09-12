@@ -1,0 +1,107 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.happytenant"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="31" />
+9-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:5:22-64
+12
+13    <application
+13-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:7:5-32:19
+14        android:allowBackup="true"
+14-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:8:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.8.0] C:\Users\ashha\.gradle\caches\transforms-3\360decbe727d268f6acef9d8a6b1723a\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:extractNativeLibs="false"
+18        android:label="@string/app_name"
+18-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:9:9-41
+19        android:supportsRtl="true"
+19-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:10:9-35
+20        android:testOnly="true"
+21        android:theme="@style/Theme.HappyTenant" >
+21-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:11:9-49
+22        <activity
+22-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:13:9-16:58
+23            android:name="com.example.tenantapp.WatchmanOnboardingActivity"
+23-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:14:13-55
+24            android:exported="false"
+24-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:15:13-37
+25            android:windowSoftInputMode="adjustResize" />
+25-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:16:13-55
+26        <activity
+26-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:18:9-21:58
+27            android:name="com.example.tenantapp.WatchmanRegisterActivity"
+27-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:19:13-53
+28            android:exported="false"
+28-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:20:13-37
+29            android:windowSoftInputMode="adjustResize" />
+29-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:21:13-55
+30        <activity
+30-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:23:9-30:20
+31            android:name="com.example.tenantapp.MainActivity"
+31-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:24:13-41
+32            android:exported="true" >
+32-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:25:13-36
+33            <intent-filter>
+33-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:26:13-29:29
+34                <action android:name="android.intent.action.MAIN" />
+34-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:27:17-69
+34-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:27:25-66
+35
+36                <category android:name="android.intent.category.LAUNCHER" />
+36-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:28:17-77
+36-->C:\Users\ashha\AndroidStudioProjects\HappyTenantLikeApp\app\src\main\AndroidManifest.xml:28:27-74
+37            </intent-filter>
+38        </activity>
+39        <activity
+39-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:23:9-27:75
+40            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+40-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:24:13-93
+41            android:excludeFromRecents="true"
+41-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:25:13-46
+42            android:exported="false"
+42-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:26:13-37
+43            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+43-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:27:13-72
+44        <!--
+45            Service handling Google Sign-In user revocation. For apps that do not integrate with
+46            Google Sign-In, this service will never be started.
+47        -->
+48        <service
+48-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:33:9-37:51
+49            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+49-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:34:13-89
+50            android:exported="true"
+50-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:35:13-36
+51            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+51-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:36:13-107
+52            android:visibleToInstantApps="true" />
+52-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\ashha\.gradle\caches\transforms-3\e9187847cea0c0b110c90e1b803476d2\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:37:13-48
+53
+54        <activity
+54-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\ashha\.gradle\caches\transforms-3\f080723b2c232a266216b70af3fe9977\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
+55            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+55-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\ashha\.gradle\caches\transforms-3\f080723b2c232a266216b70af3fe9977\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:19-85
+56            android:exported="false"
+56-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\ashha\.gradle\caches\transforms-3\f080723b2c232a266216b70af3fe9977\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:22:19-43
+57            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+57-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\ashha\.gradle\caches\transforms-3\f080723b2c232a266216b70af3fe9977\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:21:19-78
+58
+59        <meta-data
+59-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\ashha\.gradle\caches\transforms-3\3492a73e1058cb6d1329b56dcb8c216e\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+60            android:name="com.google.android.gms.version"
+60-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\ashha\.gradle\caches\transforms-3\3492a73e1058cb6d1329b56dcb8c216e\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+61            android:value="@integer/google_play_services_version" />
+61-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\ashha\.gradle\caches\transforms-3\3492a73e1058cb6d1329b56dcb8c216e\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+62    </application>
+63
+64</manifest>
