@@ -23,8 +23,9 @@ public class WatchmanRepository {
     }
 
     // Insert into rest/v1/watchman (or rest/v1/watchmen)
+    // WatchmanRepository.java
     public Result<Map<String, Object>> registerWatchmanWithBuilding(
-            String accessToken,
+            String accessToken,           // can be null
             String authUserId,
             String buildingId,
             String buildingName,
@@ -33,7 +34,7 @@ public class WatchmanRepository {
     ) {
         try {
             Map<String, Object> row = new HashMap<>();
-            row.put("auth_user_id", authUserId);
+            row.put("user_id", authUserId);
             row.put("building_id", buildingId);
             row.put("building_name", buildingName);
             row.put("watchman_name", watchmanName);
@@ -42,8 +43,11 @@ public class WatchmanRepository {
             java.util.List<Map<String, Object>> rows = new java.util.ArrayList<>();
             rows.add(row);
 
+            // IMPORTANT: only build "Bearer ..." if we actually have a token
+            String bearer = (accessToken != null && !accessToken.isEmpty()) ? "Bearer " + accessToken : null;
+
             Response<List<Map<String, Object>>> res =
-                    api.createWatchman("Bearer " + accessToken, rows).execute();
+                    api.createWatchman(bearer, rows).execute();
 
             if (res.isSuccessful()) {
                 List<Map<String, Object>> data = res.body();
@@ -55,6 +59,7 @@ public class WatchmanRepository {
             return Result.fail(e.getMessage());
         }
     }
+
 
     private String parseErr(Response<?> res) {
         try { if (res.errorBody() != null) return res.errorBody().string(); }

@@ -34,11 +34,21 @@ public final class ApiClient {
                     };
 
                     OkHttpClient http = new OkHttpClient.Builder()
-                            .addInterceptor(supabaseHeaders)
                             .addInterceptor(logging)
-                            .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-                            .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-                            .writeTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+                            .addInterceptor(chain -> {
+                                okhttp3.Request orig = chain.request();
+                                okhttp3.Request.Builder b = orig.newBuilder()
+                                        .header("apikey", BuildConfig.SUPABASE_ANON_KEY)   // always include apikey
+                                        .header("Accept", "application/json");
+
+                                // Only inject a fallback Authorization if caller DID NOT set one
+                                if (orig.header("Authorization") == null) {
+                                    b.header("Authorization", "Bearer " + BuildConfig.SUPABASE_ANON_KEY);
+                                }
+
+                                // Content-Type is set by Retrofit for @Body; add only if you need a default
+                                return chain.proceed(b.build());
+                            })
                             .build();
 
                     retrofit = new Retrofit.Builder()
