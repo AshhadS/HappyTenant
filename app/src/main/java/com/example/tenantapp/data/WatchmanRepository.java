@@ -1,67 +1,64 @@
+// com/example/tenantapp/data/WatchmanRepository.java
 package com.example.tenantapp.data;
 
 import com.example.tenantapp.net.ApiClient;
 import com.example.tenantapp.net.SupabaseService;
 import com.example.tenantapp.util.Result;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import retrofit2.Response;
 
 public class WatchmanRepository {
+
+    private static WatchmanRepository INSTANCE;
     private final SupabaseService api = ApiClient.get().create(SupabaseService.class);
 
-    // Create or update the watchman row in public.users with role='watchman'
-    public Result<List<Map<String, Object>>> upsertWatchman(String accessToken, String userId, String email, String fullName){
-        try {
-            Map<String, Object> row = new HashMap<>();
-            row.put("id", userId);
-            row.put("email", email);
-            row.put("full_name", fullName);
-            row.put("role", "watchman");
-
-            Response<List<Map<String, Object>>> res = api.upsertUser(AuthRepository.bearer(accessToken),
-                    "id", Collections.singletonList(row)).execute();
-            if (res.isSuccessful()) return Result.ok(res.body());
-            return Result.fail(parseErr(res));
-        } catch (IOException e) {
-            return Result.fail(e.getMessage());
-        }
+    public static synchronized WatchmanRepository getInstance() {
+        if (INSTANCE == null) INSTANCE = new WatchmanRepository();
+        return INSTANCE;
     }
 
-    // Create or update building for this watchman (one-to-one)
-    public Result<List<Map<String, Object>>> upsertBuilding(String accessToken, String buildingIdOrNull,
-                                                            String name, String address, String watchmanId){
+    // Insert into rest/v1/watchman (or rest/v1/watchmen)
+    public Result<Map<String, Object>> registerWatchmanWithBuilding(
+            String accessToken,
+            String authUserId,
+            String buildingId,
+            String buildingName,
+            String watchmanName,
+            String watchmanPhone
+    ) {
         try {
             Map<String, Object> row = new HashMap<>();
-            if (buildingIdOrNull != null) row.put("id", buildingIdOrNull);
-            row.put("name", name);
-            row.put("address", address);
-            row.put("watchman_id", watchmanId);
+            row.put("auth_user_id", authUserId);
+            row.put("building_id", buildingId);
+            row.put("building_name", buildingName);
+            row.put("watchman_name", watchmanName);
+            row.put("watchman_phone", watchmanPhone);
 
-            Response<List<Map<String, Object>>> res = api.upsertBuilding(AuthRepository.bearer(accessToken),
-                    "id", Collections.singletonList(row)).execute();
-            if (res.isSuccessful()) return Result.ok(res.body());
-            return Result.fail(parseErr(res));
-        } catch (IOException e) {
-            return Result.fail(e.getMessage());
-        }
-    }
+            java.util.List<Map<String, Object>> rows = new java.util.ArrayList<>();
+            rows.add(row);
 
-    public Result<List<Map<String, Object>>> getBuildingForWatchman(String accessToken, String watchmanId){
-        try {
             Response<List<Map<String, Object>>> res =
-                    api.getBuildingByWatchman(AuthRepository.bearer(accessToken),
-                            "eq." + watchmanId).execute();
-            if (res.isSuccessful()) return Result.ok(res.body());
+                    api.createWatchman("Bearer " + accessToken, rows).execute();
+
+            if (res.isSuccessful()) {
+                List<Map<String, Object>> data = res.body();
+                Map<String, Object> first = (data != null && !data.isEmpty()) ? data.get(0) : null;
+                return Result.ok(first);
+            }
             return Result.fail(parseErr(res));
         } catch (IOException e) {
             return Result.fail(e.getMessage());
         }
     }
 
-    private String parseErr(Response<?> res){
-        try { return res.errorBody() != null ? res.errorBody().string() : ("HTTP "+res.code()); }
-        catch (Exception ignored) {}
+    private String parseErr(Response<?> res) {
+        try { if (res.errorBody() != null) return res.errorBody().string(); }
+        catch (IOException ignored) {}
         return "HTTP " + res.code();
     }
 }

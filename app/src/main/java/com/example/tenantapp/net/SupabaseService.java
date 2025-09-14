@@ -18,6 +18,11 @@ public interface SupabaseService {
     @POST("auth/v1/token?grant_type=id_token")
     Call<Map<String, Object>> signInWithIdToken(@Body Map<String, Object> body);
 
+    /* ------- PING -----------------*/
+    @GET("health")   // 👈 adjust endpoint if you use another for ping
+    Call<Map<String, Object>> ping();
+
+
     /* ---------- PUBLIC TABLES ---------- */
     // users
     @GET("rest/v1/users")
@@ -34,6 +39,31 @@ public interface SupabaseService {
     Call<List<Map<String, Object>>> upsertUser(@Header("Authorization") String bearer,
                                                @Query("on_conflict") String onConflict,
                                                @Body List<Map<String, Object>> body);
+
+    // buildings
+    @GET("rest/v1/watchman")
+    Call<List<Map<String, Object>>> getWatchman(@Header("Authorization") String bearer,
+                                                          @Query("user_id") String eqUserId);
+
+    @Headers({"Prefer: return=representation", "Content-Type: application/json"})
+    @POST("rest/v1/watchman") // or watchmen if that's your table
+    Call<List<Map<String, Object>>> createWatchman(
+            @Header("Authorization") String bearer,
+            @Body List<Map<String, Object>> body
+    );
+
+    @Headers({"Prefer: resolution=merge-duplicates,return=representation", "Content-Type: application/json"})
+    @POST("rest/v1/watchman")
+    Call<List<Map<String, Object>>> upsertWatchman(@Header("Authorization") String bearer,
+                                                   @Query("on_conflict") String onConflict,
+                                                   @Body List<Map<String, Object>> body);
+
+    @Headers({
+            "Content-Type: application/json",
+            "Accept: application/json"
+    })
+    @POST("rpc/register_watchman_with_building")
+    Call<Map<String, Object>> registerWatchmanWithBuilding(@Body Map<String, Object> body);
 
     // buildings
     @GET("rest/v1/buildings")

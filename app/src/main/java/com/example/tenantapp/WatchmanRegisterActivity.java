@@ -1,147 +1,135 @@
+// com/example/tenantapp/WatchmanRegisterAndOnboardActivity.java
 package com.example.tenantapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.*;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.tenantapp.BuildConfig;
 
-import com.google.android.gms.auth.api.signin.*;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
+import com.example.tenantapp.data.AuthRepository;
+import com.example.tenantapp.data.WatchmanRepository;
+import com.example.tenantapp.util.Result;
 
-import com.example.tenantapp.data.SupabaseAuth;
+import java.util.Map;
 
 public class WatchmanRegisterActivity extends AppCompatActivity {
 
-    private static final String TAG = "WatchmanRegister";
-    private static final int RC_GOOGLE_SIGN_IN = 101;
+    private static final String TAG = "WatchmanRegOnboard";
 
-    // TODO: replace with your real values
-    private static final String SUPABASE_URL = BuildConfig.SUPABASE_URL;
-    private static final String SUPABASE_ANON_KEY = BuildConfig.SUPABASE_ANON_KEY;
-    private static final String GOOGLE_WEB_CLIENT_ID = "856945731946-qpn8vshq652kbtjfp3me4k4o3kncnn9c.apps.googleusercontent.com";
+    private EditText inputEmail, inputPassword;
+    private EditText inputBuildingName, inputBuildingId, inputWatchmanName, inputWatchmanPhone;
+    private Button btnSubmit;
+    private ProgressBar progress;
 
-    private SupabaseAuth auth;
-
-    private EditText etFullName, etPhone, etEmail, etPassword;
-    private SignInButton btnGoogle;
-    private Button btnRegisterEmail, btnTestSupabase;
-
-    private GoogleSignInClient googleSignInClient;
+    private AuthRepository authRepo;
+    private WatchmanRepository watchmanRepo;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watchman_register);
 
-        auth     = new SupabaseAuth(SUPABASE_URL, SUPABASE_ANON_KEY);
+        inputEmail         = findViewById(R.id.etEmail);
+        inputPassword      = findViewById(R.id.etPassword);
+        inputBuildingName  = findViewById(R.id.inputBuildingName);
+        inputBuildingId    = findViewById(R.id.inputBuildingId);
+        inputWatchmanName  = findViewById(R.id.etFullName);
+        inputWatchmanPhone = findViewById(R.id.etPhone);
+        btnSubmit          = findViewById(R.id.btnRegisterEmail);
+        progress           = findViewById(R.id.progress);
 
-        etFullName = findViewById(R.id.etFullName);
-        etPhone    = findViewById(R.id.etPhone);
-        etEmail    = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        btnRegisterEmail = findViewById(R.id.btnRegisterEmail);
-        btnGoogle        = findViewById(R.id.btnGoogle);
-        btnTestSupabase  = findViewById(R.id.btnTestSupabase);
+        authRepo      = new AuthRepository();
+        watchmanRepo  = WatchmanRepository.getInstance();
 
-        // Google Sign-In config (requestIdToken is required to exchange with Supabase)
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(GOOGLE_WEB_CLIENT_ID)
-                .requestEmail()
-                .build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        btnRegisterEmail.setOnClickListener(v -> doEmailRegister());
-        btnGoogle.setOnClickListener(v -> startGoogleSignIn());
-        btnTestSupabase.setOnClickListener(v ->
-                auth.ping(new SupabaseAuth.Callback2() {
-                    @Override public void onSuccess(String body) {
-                        runOnUiThread(() -> Toast.makeText(WatchmanRegisterActivity.this, "Ping OK: " + body, Toast.LENGTH_SHORT).show());
-                        Log.i(TAG, "Ping OK -> " + body);
-                    }
-                    @Override public void onError(String message, Throwable t) {
-                        runOnUiThread(() -> Toast.makeText(WatchmanRegisterActivity.this, message, Toast.LENGTH_LONG).show());
-                        Log.e(TAG, message, t);
-                    }
-                })
-        );
+        btnSubmit.setOnClickListener(v -> submit());
     }
 
-    private void doEmailRegister() {
-        String name = etFullName.getText().toString().trim();
-        String phone = etPhone.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String pass  = etPassword.getText().toString();
+    private void submit() {
+        String email         = inputEmail.getText().toString().trim();
+        String password      = inputPassword.getText().toString().trim();
+        String buildingName  = inputBuildingName.getText().toString().trim();
+        String buildingId    = inputBuildingId.getText().toString().trim();
+        String watchmanName  = inputWatchmanName.getText().toString().trim();
+        String watchmanPhone = inputWatchmanPhone.getText().toString().trim();
 
-        if (email.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(this, "Email and Password are required", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (TextUtils.isEmpty(email))         { inputEmail.setError(getString(R.string.err_required)); return; }
+        if (TextUtils.isEmpty(password))      { inputPassword.setError(getString(R.string.err_required)); return; }
+        if (TextUtils.isEmpty(buildingName))  { inputBuildingName.setError(getString(R.string.err_required)); return; }
+        if (TextUtils.isEmpty(buildingId))    { inputBuildingId.setError(getString(R.string.err_required)); return; }
+        if (TextUtils.isEmpty(watchmanName))  { inputWatchmanName.setError(getString(R.string.err_required)); return; }
+        if (TextUtils.isEmpty(watchmanPhone)) { inputWatchmanPhone.setError(getString(R.string.err_required)); return; }
 
-        btnRegisterEmail.setEnabled(false);
-        auth.signUpEmail(email, pass, new SupabaseAuth.Callback2() {
-            @Override public void onSuccess(String body) {
-                Log.i(TAG, "Email sign-up OK -> " + body);
-                runOnUiThread(() -> {
-                    btnRegisterEmail.setEnabled(true);
-                    Toast.makeText(WatchmanRegisterActivity.this, "Registered. Check email if confirmation is required.", Toast.LENGTH_LONG).show();
-                    // TODO: (optional) upsert watchman profile to your 'watchmen' table here
-                });
+        btnSubmit.setEnabled(false);
+        progress.setVisibility(View.VISIBLE);
+
+        new Thread(() -> {
+            // Step 1: sign up
+            Result<Map<String, Object>> signUp = authRepo.signUpEmail(email, password);
+            if (!signUp.isOk()) {
+                postError("Signup failed: " + signUp.getError());
+                return;
             }
-            @Override public void onError(String message, Throwable t) {
-                Log.e(TAG, message, t);
-                runOnUiThread(() -> {
-                    btnRegisterEmail.setEnabled(true);
-                    Toast.makeText(WatchmanRegisterActivity.this, message, Toast.LENGTH_LONG).show();
-                });
+
+            Map<String, Object> signUpResp = signUp.get();
+            Log.d(TAG, "Signup OK: " + signUpResp);
+
+            // Get auth user id from response
+            String authUserId  = authRepo.extractAuthUserId(signUp.get());
+            String accessToken = authRepo.extractAccessToken(signUp.get());
+            if (authUserId == null) {
+                postError("Signup OK but no user.id returned");
+                return;
             }
+
+            // Optional: save session/email in Prefs here
+            Prefs.setSignedIn(WatchmanRegisterActivity.this, true);
+
+            // Step 2: register watchman with building (REST)
+            Result<Map<String, Object>> reg = watchmanRepo.registerWatchmanWithBuilding(
+                    accessToken, authUserId, buildingId, buildingName, watchmanName, watchmanPhone
+            );
+
+            if (!reg.isOk()) {
+                postError("Watchman register failed: " + reg.getError());
+                return;
+            }
+
+            Map<String, Object> created = reg.get();
+            Log.d(TAG, "Watchman create OK: " + created);
+
+            // Save basic profile locally
+            Prefs.saveProfile(
+                    WatchmanRegisterActivity.this,
+                    buildingId, buildingName, watchmanName, watchmanPhone
+            );
+            Prefs.setWatchmanOnboarded(WatchmanRegisterActivity.this, true);
+
+            runOnUiThread(() -> {
+                Toast.makeText(this, "Registration & Onboarding complete!", Toast.LENGTH_SHORT).show();
+                goHome();
+            });
+        }).start();
+    }
+
+    private void postError(String msg) {
+        Log.e(TAG, msg);
+        runOnUiThread(() -> {
+            btnSubmit.setEnabled(true);
+            progress.setVisibility(View.GONE);
+            Toast.makeText(this, msg + "\n" + getString(R.string.msg_supabase_hint), Toast.LENGTH_LONG).show();
         });
     }
 
-    private void startGoogleSignIn() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_GOOGLE_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount acct = task.getResult(ApiException.class);
-                String idToken = acct.getIdToken();
-                if (idToken == null) {
-                    Toast.makeText(this, "Google ID token is null", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                exchangeGoogleIdToken(idToken);
-            } catch (ApiException e) {
-                Log.e(TAG, "Google sign-in failed: " + e.getStatusCode(), e);
-                Toast.makeText(this, "Google sign-in failed: " + e.getStatusCode(), Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    private void exchangeGoogleIdToken(String idToken) {
-        auth.signInWithGoogleIdToken(idToken, new SupabaseAuth.Callback2() {
-            @Override public void onSuccess(String body) {
-                Log.i(TAG, "Supabase Google session -> " + body);
-                runOnUiThread(() ->
-                        Toast.makeText(WatchmanRegisterActivity.this, "Google sign-in OK", Toast.LENGTH_SHORT).show()
-                );
-                // TODO: (optional) upsert watchman profile to your 'watchmen' table here
-            }
-            @Override public void onError(String message, Throwable t) {
-                Log.e(TAG, message, t);
-                runOnUiThread(() ->
-                        Toast.makeText(WatchmanRegisterActivity.this, message, Toast.LENGTH_LONG).show()
-                );
-            }
-        });
+    private void goHome() {
+        btnSubmit.setEnabled(true);
+        progress.setVisibility(View.GONE);
+        Intent i = new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+        finish();
     }
 }

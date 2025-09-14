@@ -44,6 +44,24 @@ public class AuthRepository {
         return "HTTP " + res.code();
     }
 
+    // Helper to extract auth user id from signup response
+    // Supabase signUp returns: { "user": { "id": "...", "email": ... }, "session": {...} }
+    public String extractAccessToken(Map<String, Object> authResp) {
+        if (authResp == null) return null;
+        Object session = authResp.get("session");
+        if (!(session instanceof Map)) return null;
+        Object tok = ((Map<?, ?>) session).get("access_token");
+        return tok != null ? String.valueOf(tok) : null;
+    }
+
+    public String extractAuthUserId(Map<String, Object> authResp) {
+        if (authResp == null) return null;
+        Object userObj = authResp.get("user");
+        if (!(userObj instanceof Map)) return null;
+        Object id = ((Map<String, Object>) userObj).get("id");
+        return id != null ? String.valueOf(id) : null;
+    }
+
     @Nullable
     public static String bearer(@Nullable String accessToken){
         return accessToken == null ? null : ("Bearer " + accessToken);

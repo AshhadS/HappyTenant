@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent" android:layout_height="match_parent">-->
 
-    <LinearLayout
-        android:orientation="vertical" android:padding="20dp"
-        android:layout_width="match_parent" android:layout_height="wrap_content">
+<!--    <LinearLayout-->
+<!--        android:orientation="vertical" android:padding="20dp"-->
+<!--        android:layout_width="match_parent" android:layout_height="wrap_content">-->
 
-        <TextView
-            android:id="@+id/title"
-            android:text="@string/watchman_onboarding_title"
-            android:textSize="20sp" android:textStyle="bold"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+<!--        <TextView-->
+<!--            android:id="@+id/title"-->
+<!--            android:tex t="@string/watchman_onboarding_title"-->
+<!--            android:textSize="20sp" android:textStyle="bold"-->
+<!--            android:layout_width="wrap_content" android:layout_height="wrap_content"/>-->
 
-        <TextView
-            android:text="@string/watchman_onboarding_subtitle"
-            android:layout_marginTop="6dp"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+<!--        <TextView-->
+<!--            android:text="@string/watchman_onboarding_subtitle"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:layout_width="wrap_content" android:layout_height="wrap_content"/>-->
 
-        <EditText
-            android:id="@+id/inputBuildingName"
-            android:hint="@string/hint_building_name"
-            android:layout_marginTop="18dp"
-            android:inputType="textCapWords"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+<!--        <EditText-->
+<!--            android:id="@+id/inputBuildingName"-->
+<!--            android:hint="@string/hint_building_name"-->
+<!--            android:layout_marginTop="18dp"-->
+<!--            android:inputType="textCapWords"-->
+<!--            android:layout_width="match_parent" android:layout_height="wrap_content"/>-->
 
-        <EditText
-            android:id="@+id/inputBuildingId"
-            android:hint="@string/hint_building_id"
-            android:layout_marginTop="12dp"
-            android:inputType="text"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+<!--        <EditText-->
+<!--            android:id="@+id/inputBuildingId"-->
+<!--            android:hint="@string/hint_building_id"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:inputType="text"-->
+<!--            android:layout_width="match_parent" android:layout_height="wrap_content"/>-->
 
-        <EditText
-            android:id="@+id/inputWatchmanName"
-            android:hint="@string/hint_watchman_name"
-            android:layout_marginTop="12dp"
-            android:inputType="textPersonName"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+<!--        <EditText-->
+<!--            android:id="@+id/inputWatchmanName"-->
+<!--            android:hint="@string/hint_watchman_name"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:layout_width="match_parent" android:layout_height="wrap_content"/>-->
 
-        <EditText
-            android:id="@+id/inputWatchmanPhone"
-            android:hint="@string/hint_watchman_phone"
-            android:layout_marginTop="12dp"
-            android:inputType="phone"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+<!--        <EditText-->
+<!--            android:id="@+id/inputWatchmanPhone"-->
+<!--            android:hint="@string/hint_watchman_phone"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:inputType="phone"-->
+<!--            android:layout_width="match_parent" android:layout_height="wrap_content"/>-->
 
-        <Button
-            android:id="@+id/btnTestSupabase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test Supabase Connection"
-            android:layout_marginTop="16dp" />
+<!--        <Button-->
+<!--            android:id="@+id/btnTestSupabase"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Test Supabase Connection"-->
+<!--            android:layout_marginTop="16dp" />-->
 
-        <Button
-            android:id="@+id/btnSubmit"
-            android:text="@string/action_register_building"
-            android:layout_marginTop="18dp"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+<!--        <Button-->
+<!--            android:id="@+id/btnSubmit"-->
+<!--            android:text="@string/action_register_building"-->
+<!--            android:layout_marginTop="18dp"-->
+<!--            android:layout_width="match_parent" android:layout_height="wrap_content"/>-->
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:visibility="gone"
-            android:layout_marginTop="12dp"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-    </LinearLayout>
-</ScrollView>
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progress"-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:layout_width="wrap_content" android:layout_height="wrap_content"/>-->
+<!--    </LinearLayout>-->
+<!--</ScrollView>-->

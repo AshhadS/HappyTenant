@@ -50,6 +50,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <EditText
+            android:id="@+id/inputBuildingName"
+            android:hint="@string/hint_building_name"
+            android:layout_marginTop="18dp"
+            android:inputType="textCapWords"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/inputBuildingId"
+            android:hint="@string/hint_building_id"
+            android:layout_marginTop="12dp"
+            android:inputType="text"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btnRegisterEmail"
             android:text="Register with Email"

@@ -1,12 +1,44 @@
 package com.example.tenantapp.util;
 
-public class Result<T> {
-    public final T data;
-    public final String error;
+public abstract class Result<T> {
 
-    private Result(T data, String error) { this.data = data; this.error = error; }
+    // ---- Factory methods ----
+    public static <T> Success<T> ok(T data) {
+        return new Success<>(data);
+    }
 
-    public static <T> Result<T> ok(T data) { return new Result<>(data, null); }
-    public static <T> Result<T> fail(String error) { return new Result<>(null, error); }
-    public boolean isOk() { return error == null; }
+    public static <T> Error<T> fail(String message) {
+        return new Error<>(message);
+    }
+
+    // ---- Convenience methods ----
+    public boolean isOk() { return this instanceof Success; }
+    public boolean isError() { return this instanceof Error; }
+
+    public T get() {
+        if (this instanceof Success) {
+            return ((Success<T>) this).data;
+        }
+        return null;
+    }
+
+    public String getError() {
+        if (this instanceof Error) {
+            return ((Error<T>) this).message;
+        }
+        return null;
+    }
+
+    // ---- Subclasses ----
+    public static final class Success<T> extends Result<T> {
+        private final T data;
+        public Success(T data) { this.data = data; }
+        public T getData() { return data; }
+    }
+
+    public static final class Error<T> extends Result<T> {
+        private final String message;
+        public Error(String message) { this.message = message; }
+        public String getMessage() { return message; }
+    }
 }
