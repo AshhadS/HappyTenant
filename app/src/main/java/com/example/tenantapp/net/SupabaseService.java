@@ -58,6 +58,35 @@ public interface SupabaseService {
                                                    @Query("on_conflict") String onConflict,
                                                    @Body List<Map<String, Object>> body);
 
+    @GET("watchman")
+    Call<List<Map<String,Object>>> getMyWatchman(
+            @Header("Authorization") String bearer,
+            @Header("apikey") String apiKey,
+            @Query("select") String select,
+            @Query("user_id") String userIdEq // pass "eq.{authUid}"
+    );
+
+    // --- TENANT ---
+
+    @GET("tenant")
+    Call<List<Map<String,Object>>> listTenantsByWatchman(
+            @Header("Authorization") String bearer,
+            @Header("apikey") String apiKey,
+            @Query("select") String select,
+            @Query("watchman_id") String watchmanIdEq // pass "eq.{watchmanId}"
+    );
+
+    @Headers({
+            "Content-Type: application/json",
+            "Prefer: return=representation"
+    })
+    @POST("tenant")
+    Call<List<Map<String,Object>>> createTenant(
+            @Header("Authorization") String bearer,
+            @Header("apikey") String apiKey,
+            @Body Map<String,Object> body
+    );
+
     @Headers({
             "Content-Type: application/json",
             "Accept: application/json"

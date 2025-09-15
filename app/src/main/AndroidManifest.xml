@@ -11,7 +11,12 @@
         android:theme="@style/Theme.HappyTenant">
 
         <activity
-            android:name=".WatchmanOnboardingActivity"
+            android:name=".WatchmanTenantsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".AddTenantActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
