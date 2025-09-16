@@ -10,7 +10,7 @@
     <string name="hint_watchman_phone">Phone x</string>
 
     <string name="action_register_building">Register Building</string>
-    <string name="action_open_watchman_onboarding">Watchman: Register Building</string>
+    <string name="action_open_watchman_onboarding">Watchman: Login</string>
     <string name="action_open_tenant_onboarding">Tenant: Register</string>
 
     <string name="err_required">Required</string>
