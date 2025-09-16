@@ -30,6 +30,7 @@ public class AuthRepository {
             Map<String, Object> body = new HashMap<>();
             body.put("email", email);
             body.put("password", password);
+
             Response<Map<String, Object>> res = api.signInEmail(body).execute();
             if (res.isSuccessful()) return Result.ok(res.body());
             return Result.fail(parseErr(res));

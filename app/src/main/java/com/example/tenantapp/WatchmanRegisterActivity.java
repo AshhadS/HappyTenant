@@ -44,7 +44,7 @@ public class WatchmanRegisterActivity extends AppCompatActivity {
         progress           = findViewById(R.id.progress);
 
         authRepo      = new AuthRepository();
-        watchmanRepo  = WatchmanRepository.getInstance();
+        watchmanRepo  = WatchmanRepository.getInstance(getApplicationContext());
 
         this.sessionStore = SessionStore.getInstance(getApplicationContext());
         btnSubmit.setOnClickListener(v -> submit());

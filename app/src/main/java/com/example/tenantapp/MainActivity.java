@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnWatchman = findViewById(R.id.btnWatchmanOnboarding);
         btnWatchman.setOnClickListener(v ->
-                startActivity(new Intent(this, WatchmanRegisterActivity.class)));
+                startActivity(new Intent(this, WatchmanLoginActivity.class)));
 
 //        Button btnTenant = findViewById(R.id.btnTenantOnboarding);
 //        btnWatchman.setOnClickListener(v ->
