@@ -98,6 +98,7 @@ public class TenantRepository {
             String watchmanId,
             String fullName,
             String phone,
+            String email,
             String unitNumber,
             Integer floor,
             String optionalUserId // pass null if your schema allows it
@@ -107,6 +108,7 @@ public class TenantRepository {
             body.put("watchman_id", watchmanId);
             body.put("full_name", fullName);
             body.put("phone", phone);
+            body.put("email", email);
             body.put("unit_number", unitNumber);
             body.put("floor", floor);
 

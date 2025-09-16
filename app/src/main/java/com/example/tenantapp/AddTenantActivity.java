@@ -19,7 +19,7 @@ import com.example.tenantapp.net.ApiClient;
 
 public class AddTenantActivity extends AppCompatActivity {
 
-    private EditText etFullName, etPhone, etUnit, etFloor, etUserIdOptional;
+    private EditText etFullName, etPhone, etEmail, etUnit, etFloor, etUserIdOptional;
     private Button btnSave, btnCancel;
     private TextView tvHeader;
 
@@ -41,6 +41,7 @@ public class AddTenantActivity extends AppCompatActivity {
         tvHeader = findViewById(R.id.tvHeader);
         etFullName = findViewById(R.id.etFullName);
         etPhone = findViewById(R.id.etPhone);
+        etEmail = findViewById(R.id.etEmail);
         etUnit = findViewById(R.id.etUnit);
         etFloor = findViewById(R.id.etFloor);
         etUserIdOptional = findViewById(R.id.etUserIdOptional);
@@ -64,6 +65,7 @@ public class AddTenantActivity extends AppCompatActivity {
     private void save() {
         String full = etFullName.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
         String unit = etUnit.getText().toString().trim();
         String floorStr = etFloor.getText().toString().trim();
         String userIdOpt = sessionStore.getAuthUserId();;
@@ -83,7 +85,7 @@ public class AddTenantActivity extends AppCompatActivity {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             Result<Map<String,Object>> res = repo.createTenant(
-                    watchmanId, full, phone, unit, floor,
+                    watchmanId, full, phone, email, unit, floor,
                     userIdOpt.isEmpty() ? null : userIdOpt
             );
 

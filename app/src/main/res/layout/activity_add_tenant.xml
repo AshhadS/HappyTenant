@@ -30,6 +30,14 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/etEmail"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
             android:id="@+id/etUnit"
             android:hint="Unit number"
             android:layout_marginTop="8dp"
