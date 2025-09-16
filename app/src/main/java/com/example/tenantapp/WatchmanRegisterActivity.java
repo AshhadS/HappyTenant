@@ -27,6 +27,7 @@ public class WatchmanRegisterActivity extends AppCompatActivity {
 
     private AuthRepository authRepo;
     private WatchmanRepository watchmanRepo;
+    private SessionStore sessionStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class WatchmanRegisterActivity extends AppCompatActivity {
         authRepo      = new AuthRepository();
         watchmanRepo  = WatchmanRepository.getInstance();
 
+        this.sessionStore = SessionStore.getInstance(getApplicationContext());
         btnSubmit.setOnClickListener(v -> submit());
     }
 
@@ -85,6 +87,8 @@ public class WatchmanRegisterActivity extends AppCompatActivity {
                 return;
             }
 
+            this.sessionStore.updateSession(accessToken, authUserId);
+
             // Optional: save session/email in Prefs here
             Prefs.setSignedIn(WatchmanRegisterActivity.this, true);
 
@@ -110,7 +114,7 @@ public class WatchmanRegisterActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 Toast.makeText(this, "Registration & Onboarding complete!", Toast.LENGTH_SHORT).show();
-                goHome();
+                goNext();
             });
         }).start();
     }
@@ -124,10 +128,10 @@ public class WatchmanRegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void goHome() {
+    private void goNext() {
         btnSubmit.setEnabled(true);
         progress.setVisibility(View.GONE);
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, WatchmanTenantsActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
         finish();

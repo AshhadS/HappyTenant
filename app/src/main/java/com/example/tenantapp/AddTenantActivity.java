@@ -28,6 +28,7 @@ public class AddTenantActivity extends AppCompatActivity {
 
     private TenantRepository repo;
     private SupabaseService supabase;
+    private SessionStore sessionStore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class AddTenantActivity extends AppCompatActivity {
 
 
         repo = TenantRepository.getInstance(getApplicationContext());
+        this.sessionStore = SessionStore.getInstance(getApplicationContext());
 
         btnSave.setOnClickListener(v -> save());
         btnCancel.setOnClickListener(v -> {
@@ -64,7 +66,7 @@ public class AddTenantActivity extends AppCompatActivity {
         String phone = etPhone.getText().toString().trim();
         String unit = etUnit.getText().toString().trim();
         String floorStr = etFloor.getText().toString().trim();
-        String userIdOpt = etUserIdOptional.getText().toString().trim();
+        String userIdOpt = sessionStore.getAuthUserId();;
         Integer floor = floorStr.isEmpty() ? null : Integer.valueOf(floorStr);
 
         if (full.isEmpty() || unit.isEmpty()) {

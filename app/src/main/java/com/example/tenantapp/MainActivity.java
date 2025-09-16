@@ -19,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
         Button btnWatchman = findViewById(R.id.btnWatchmanOnboarding);
         btnWatchman.setOnClickListener(v ->
                 startActivity(new Intent(this, WatchmanRegisterActivity.class)));
+
+//        Button btnTenant = findViewById(R.id.btnTenantOnboarding);
+//        btnWatchman.setOnClickListener(v ->
+//                startActivity(new Intent(this, WatchmanTenantsActivity.class)));
+
+
     }
 
     @Override

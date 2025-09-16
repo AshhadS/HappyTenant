@@ -22,6 +22,7 @@ public class TenantRepository {
     private final String bearer;
     private final String apiKey;
     private final Context appCtx;
+    private SessionStore sessionStore;
 
 
 
@@ -45,9 +46,9 @@ public class TenantRepository {
     private TenantRepository(Context context) {
         this.appCtx = context.getApplicationContext();
 
-        SessionStore session = SessionStore.getInstance(appCtx);
-        this.apiKey = session.getApiKey();
-        this.bearer = "Bearer " + session.getAccessToken();
+        this.sessionStore = SessionStore.getInstance(appCtx);
+        this.apiKey = sessionStore.getApiKey();
+        this.bearer = "Bearer " + sessionStore.getAccessToken();
 
         this.api = ApiClient.get().create(SupabaseService.class);
     }
@@ -56,8 +57,8 @@ public class TenantRepository {
     public Result<Map<String,Object>> getMyWatchman(String authUserId) {
         try {
             Response<List<Map<String,Object>>> res = api.getMyWatchman(
-                    this.bearer, this.apiKey,
-                    "id, user_id, building_id, building_name, building_address, created_at",
+                    this.bearer(), this.apiKey,
+                    "id, user_id, building_id, building_name, created_at",
                     "eq." + authUserId
             ).execute();
 
@@ -74,7 +75,7 @@ public class TenantRepository {
     public Result<List<Map<String,Object>>> listTenants(String watchmanId) {
         try {
             Response<List<Map<String,Object>>> res = api.listTenantsByWatchman(
-                    this.bearer, this.apiKey,
+                    this.bearer(), this.apiKey,
                     "id, user_id, full_name, phone, unit_number, floor, created_at",
                     "eq." + watchmanId
             ).execute();
@@ -114,7 +115,7 @@ public class TenantRepository {
             }
 
             Response<List<Map<String,Object>>> res = api.createTenant(
-                    this.bearer, this.apiKey, body
+                    this.bearer(), this.apiKey, body
             ).execute();
 
             if (!res.isSuccessful()) return Result.fail(parseErr(res));
@@ -130,5 +131,10 @@ public class TenantRepository {
         try { if (res.errorBody() != null) return res.errorBody().string(); }
         catch (IOException ignored) {}
         return "HTTP " + res.code();
+    }
+
+    private String bearer() {
+        String t = this.sessionStore.getAccessToken();
+        return (t == null || t.isEmpty()) ? "" : "Bearer " + t;
     }
 }

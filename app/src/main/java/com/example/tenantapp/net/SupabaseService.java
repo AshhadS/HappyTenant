@@ -58,7 +58,7 @@ public interface SupabaseService {
                                                    @Query("on_conflict") String onConflict,
                                                    @Body List<Map<String, Object>> body);
 
-    @GET("watchman")
+    @GET("rest/v1/watchman")
     Call<List<Map<String,Object>>> getMyWatchman(
             @Header("Authorization") String bearer,
             @Header("apikey") String apiKey,
@@ -68,7 +68,7 @@ public interface SupabaseService {
 
     // --- TENANT ---
 
-    @GET("tenant")
+    @GET("rest/v1/tenant")
     Call<List<Map<String,Object>>> listTenantsByWatchman(
             @Header("Authorization") String bearer,
             @Header("apikey") String apiKey,
@@ -80,7 +80,7 @@ public interface SupabaseService {
             "Content-Type: application/json",
             "Prefer: return=representation"
     })
-    @POST("tenant")
+    @POST("rest/v1/tenant")
     Call<List<Map<String,Object>>> createTenant(
             @Header("Authorization") String bearer,
             @Header("apikey") String apiKey,

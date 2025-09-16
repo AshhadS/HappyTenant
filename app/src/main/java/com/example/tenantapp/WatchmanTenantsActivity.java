@@ -35,7 +35,6 @@ public class WatchmanTenantsActivity extends AppCompatActivity {
     private String buildingAddress;
 
     private TenantAdapter adapter;
-    private Context appCtx;
     private SessionStore sessionStore;
 
 
@@ -55,11 +54,8 @@ public class WatchmanTenantsActivity extends AppCompatActivity {
         adapter = new TenantAdapter(new ArrayList<>());
         rvTenants.setAdapter(adapter);
 
-//        supabase = SupabaseService.getInstance(getApplicationContext());
-//        SupabaseApi api = ApiClient.getInstance().create(SupabaseApi.class);
-//        repo = new TenantRepository(api, supabase);
         repo  = TenantRepository.getInstance(getApplicationContext());
-        SessionStore session = SessionStore.getInstance(getApplicationContext());
+        this.sessionStore = SessionStore.getInstance(getApplicationContext());
 
         loadHeaderAndTenants();
 
@@ -93,7 +89,7 @@ public class WatchmanTenantsActivity extends AppCompatActivity {
             Map<String,Object> w = wres.get();
             watchmanId = String.valueOf(w.get("id"));
             buildingName = String.valueOf(w.get("building_name"));
-            buildingAddress = String.valueOf(w.get("building_address"));
+            buildingAddress = "Building Addrress...";
 
             Result<List<Map<String,Object>>> tRes = repo.listTenants(watchmanId);
 
