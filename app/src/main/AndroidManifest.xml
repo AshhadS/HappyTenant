@@ -31,6 +31,16 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".TenantSignupActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".TenantDashboardActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

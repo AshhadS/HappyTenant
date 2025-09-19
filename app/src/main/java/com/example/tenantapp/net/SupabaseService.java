@@ -87,10 +87,21 @@ public interface SupabaseService {
             @Body Map<String,Object> body
     );
 
+    @PATCH("rest/v1/tenant")
     @Headers({
             "Content-Type: application/json",
-            "Accept: application/json"
+            "Prefer: return=representation"
     })
+    Call<List<Map<String, Object>>> linkTenantByEmail(
+            @Query("email") String email,   // e.g. eq.user@example.com
+            @Body Map<String, Object> body
+    );
+
+
+    @GET("rest/v1/tenant")
+    @Headers("Content-Type: application/json")
+    Call<List<Map<String, Object>>> getTenantByEmail(@Query("email") String email);
+
     @POST("rpc/register_watchman_with_building")
     Call<Map<String, Object>> registerWatchmanWithBuilding(@Body Map<String, Object> body);
 

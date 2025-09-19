@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, WatchmanLoginActivity.class));
         });
 
-//        Button btnTeanant = findViewById(R.id.btnTenantOnboarding);
-//        btnTeanant.setOnClickListener(v -> {
-//            Log.d("MainActivity", "Tenant button clicked");
-//            startActivity(new Intent(MainActivity.this, WatchmanTenantsActivity.class));
-//        });
+        Button btnTeanant = findViewById(R.id.btnTenantOnboarding);
+        btnTeanant.setOnClickListener(v -> {
+            Log.d("MainActivity", "Tenant button clicked");
+            startActivity(new Intent(MainActivity.this, TenantSignupActivity.class));
+        });
 
 
     }

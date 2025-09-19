@@ -129,6 +129,40 @@ public class TenantRepository {
         }
     }
 
+    public Result<Map<String, Object>> linkTenantToSelfByEmail(String email, String userId) {
+        try {
+            Map<String, Object> body = new HashMap<>();
+            body.put("user_id", userId);
+
+            Response<List<Map<String, Object>>> res = api
+                    .linkTenantByEmail("eq." + email, body)   // call Retrofit endpoint
+                    .execute();
+
+            if (res.isSuccessful() && res.body() != null && !res.body().isEmpty()) {
+                return Result.ok(res.body().get(0)); // return the updated tenant row
+            }
+            return Result.fail("Failed to link tenant: " + (res.errorBody() != null ? res.errorBody().string() : "unknown error"));
+        } catch (IOException e) {
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    public Result<Map<String, Object>> getTenantByEmail(String email) {
+        try {
+            Response<List<Map<String, Object>>> res = api
+                    .getTenantByEmail("eq." + email)
+                    .execute();
+
+            if (res.isSuccessful() && res.body() != null && !res.body().isEmpty()) {
+                return Result.ok(res.body().get(0));  // return the tenant row
+            }
+            return Result.fail("Tenant not found for email: " + email);
+        } catch (IOException e) {
+            return Result.fail(e.getMessage());
+        }
+    }
+
+
     private String parseErr(Response<?> res) {
         try { if (res.errorBody() != null) return res.errorBody().string(); }
         catch (IOException ignored) {}
