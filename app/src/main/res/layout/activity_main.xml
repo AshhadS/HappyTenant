@@ -11,7 +11,7 @@
         android:id="@+id/homeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Happy Tenent" />
+        android:text="@string/happy_tenent" />
 
     <Button
         android:id="@+id/btnWatchmanOnboarding"
@@ -27,5 +27,10 @@
         android:layout_height="wrap_content"
         android:text="@string/action_open_tenant_onboarding"
         android:visibility="visible" />
+
+    <com.example.tenantapp.ui.TranslationButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/translate" />
 
 </LinearLayout>

@@ -17,4 +17,24 @@
     <string name="msg_onboard_success">Building registered.</string>
     <string name="msg_onboard_failed">Failed: %1$s</string>
     <string name="msg_supabase_hint">Check your Supabase URL/Anon Key in BuildConfig.</string>
+    <string name="add_tenant_building">Add Tenant — Building</string>
+    <string name="unit_number">Unit number</string>
+    <string name="floor_optional">Floor (optional)</string>
+    <string name="tenant_user_id_optional">Tenant user_id (optional)</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="happy_tenent">Happy Tenent</string>
+    <string name="welcome_tenant">Welcome, Tenant!</string>
+    <string name="logout">Logout</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="watchman_login">Watchman Login</string>
+    <string name="email">Email</string>
+    <string name="register_with_email">Register with Email</string>
+    <string name="test_supabase_connection">Test Supabase Connection</string>
+    <string name="watchman_dashboard">Watchman Dashboard</string>
+    <string name="no_tenants_yet">No tenants yet.</string>
+    <string name="add_tenant">Add tenant</string>
+    <string name="unit_floor">Unit — • Floor —</string>
+    <string name="password">Password</string>
+    <string name="translate">Translate</string>
 </resources>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:text="Watchman Login"
+        android:text="@string/watchman_login"
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_width="wrap_content"
@@ -12,7 +12,7 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:layout_marginTop="12dp"
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"

@@ -44,7 +44,7 @@
 
         <EditText
             android:id="@+id/etPassword"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
 
         <Button
             android:id="@+id/btnRegisterEmail"
-            android:text="Register with Email"
+            android:text="@string/register_with_email"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -91,7 +91,7 @@
 
         <Button
             android:id="@+id/btnTestSupabase"
-            android:text="Test Supabase Connection"
+            android:text="@string/test_supabase_connection"
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

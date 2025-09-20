@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">المستأجر السعيد</string>
+
+    <string name="watchman_onboarding_title">تسجيل الحارس</string>
+    <string name="watchman_onboarding_subtitle">سجل مبناك حتى يتمكن المستأجرون من الاتصال بك.</string>
+
+    <string name="hint_building_name">اسم المبنى</string>
+    <string name="hint_building_id">معرّف / رمز المبنى</string>
+    <string name="hint_watchman_name">اسمك</string>
+    <string name="hint_watchman_phone">رقم الهاتف</string>
+
+    <string name="action_register_building">تسجيل المبنى</string>
+    <string name="action_open_watchman_onboarding">الحارس: تسجيل الدخول</string>
+    <string name="action_open_tenant_onboarding">المستأجر: تسجيل</string>
+
+    <string name="err_required">مطلوب</string>
+    <string name="msg_onboard_success">تم تسجيل المبنى.</string>
+    <string name="msg_onboard_failed">فشل: %1$s</string>
+    <string name="msg_supabase_hint">تحقق من رابط Supabase والمفتاح المجهول في BuildConfig.</string>
+    <string name="add_tenant_building">إضافة مستأجر — مبنى</string>
+    <string name="unit_number">رقم الوحدة</string>
+    <string name="floor_optional">الطابق (اختياري)</string>
+    <string name="tenant_user_id_optional">معرّف المستخدم للمستأجر (اختياري)</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="happy_tenent">المستأجر السعيد</string>
+    <string name="welcome_tenant">مرحباً أيها المستأجر!</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="sign_up">تسجيل</string>
+    <string name="watchman_login">تسجيل دخول الحارس</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="register_with_email">سجل باستخدام البريد الإلكتروني</string>
+    <string name="test_supabase_connection">اختبار اتصال Supabase</string>
+    <string name="watchman_dashboard">لوحة الحارس</string>
+    <string name="no_tenants_yet">لا يوجد مستأجرون بعد.</string>
+    <string name="add_tenant">إضافة مستأجر</string>
+    <string name="unit_floor">الوحدة — • الطابق —</string>
+    <string name="password">كلمة المرور</string>
+    <string name="translate">ترجمة</string>
+</resources>

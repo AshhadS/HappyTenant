@@ -8,7 +8,7 @@
 
         <TextView
             android:id="@+id/tvBuildingTitle"
-            android:text="Watchman Dashboard"
+            android:text="@string/watchman_dashboard"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/tvEmpty"
-            android:text="No tenants yet."
+            android:text="@string/no_tenants_yet"
             android:visibility="gone"
             android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
         android:id="@+id/fabAddTenant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Add tenant"
+        android:contentDescription="@string/add_tenant"
         app:srcCompat="@android:drawable/ic_input_add"
         app:layout_anchorGravity="bottom|end"
         android:layout_margin="16dp"

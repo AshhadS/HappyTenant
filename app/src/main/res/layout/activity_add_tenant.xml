@@ -8,7 +8,7 @@
 
         <TextView
             android:id="@+id/tvHeader"
-            android:text="Add Tenant — Building"
+            android:text="@string/add_tenant_building"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_width="wrap_content"
@@ -39,14 +39,14 @@
 
         <EditText
             android:id="@+id/etUnit"
-            android:hint="Unit number"
+            android:hint="@string/unit_number"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/etFloor"
-            android:hint="Floor (optional)"
+            android:hint="@string/floor_optional"
             android:inputType="number"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         <!-- Optional: fill if your schema requires tenant.user_id NOT NULL -->
         <EditText
             android:id="@+id/etUserIdOptional"
-            android:hint="Tenant user_id (optional)"
+            android:hint="@string/tenant_user_id_optional"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -68,7 +68,7 @@
 
             <Button
                 android:id="@+id/btnSave"
-                android:text="Save"
+                android:text="@string/save"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -79,7 +79,7 @@
 
             <Button
                 android:id="@+id/btnCancel"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
